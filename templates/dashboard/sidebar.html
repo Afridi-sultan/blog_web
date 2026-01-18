@@ -1,0 +1,42 @@
+    <style>
+  .sidebar {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    padding-top: 20px;
+}
+
+.sidebar a {
+    color: #495057;
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #e9ecef;
+    color: #000;
+}
+
+.active-link {
+    background-color: #ffffff !important;
+    color: #007bff !important;
+    font-weight: 600;
+    border-left: 4px solid #007bff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+    </style>
+
+
+
+
+
+        <nav class="col-md-2 sidebar">
+         <h4 class="text-dark text-center">My Panel</h4>
+            <hr class="bg-secondary">
+            <a href="{% url 'dashboard_url'%}" class="{% if '/dashboard/' == request.path %}bg-warning{%endif%}">Dashboard</a>
+            <a href="{% url 'dashboard_category'%}" class="{% if '/dashboard/category/' == request.path %}bg-warning{%endif%}">Categories</a>
+            <a href="{% url 'dashboard_blogs'%}" class="{% if '/dashboard/blogs/' == request.path %}bg-warning{%endif%}">Blogs</a>
+        </nav>
+
