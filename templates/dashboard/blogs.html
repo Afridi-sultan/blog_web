@@ -15,27 +15,37 @@
 
 
         <main class="col-md-10 bg-light p-4">
-            <h2>Blogs</h2>
-            <hr>
+            <h2>All Blogs</h2>
+
 
             <div class="row">
-                <div class="col-md-6">
-                    <div class="card text-white bg-primary mb-3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">All Blogs</h5>
-                            <p class="card-text display-4"></p>
-                        </div>
-                    </div>
-                </div>
+               <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Sl No</th>
+                          <th>Blog Title</th>
+                          <th>Created at</th>
+                          <th> Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {% for blog in all_blogs %}
+                        <tr>
+                          <td >{{forloop.counter}}</td>
+                          <td>{{blog.title}}</td>
+                          <td>{{blog.created_at}}</td>
+                          <td>
+                              <div class="d-flex gap-1">
+                                  <a href="" class="btn btn-warning btn-sm mr-3">Edit</a>
+                                  <a href="" class="btn btn-danger btn-sm">Delete</a>
+                              </div>
+                          </td>
 
-                <div class="col-md-6">
-                    <div class="card text-white bg-success mb-3">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Posts</h5>
-                            <p class="card-text display-4"></p>
-                        </div>
-                    </div>
-                </div>
+                        </tr>
+                      {% endfor %}
+
+                      </tbody>
+                    </table>
             </div>
 
         </main>

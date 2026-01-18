@@ -54,7 +54,7 @@ def login(request):
             user = auth.authenticate(username=username,password=password)
             if user is not None:
                 auth.login(request, user)
-            return redirect('/')
+            return redirect('dashboard_url')
     form = AuthenticationForm()
     contex = {
         'form':form

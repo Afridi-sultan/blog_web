@@ -18,4 +18,8 @@ def dashboard_category(request):
 
 #user dashboard blogs
 def dashboard_blogs(request):
-    return render(request,'dashboard/blogs.html')
+    all_blogs = Blog.objects.all().order_by('-created_at')
+    context = {
+        'all_blogs':all_blogs
+    }
+    return render(request,'dashboard/blogs.html',context)

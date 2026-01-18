@@ -8,9 +8,19 @@
 {% include 'dashboard/sidebar.html' %}
 
 
+
         <main class="col-md-10 bg-light p-4">
+
+            <div class="d-flex align-items-center shadow-sm p-2 bg-white rounded-pill border">
+                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width: 30px; height: 30px;">
+                    {{ user.username|slice:":1"|upper }}
+                </div>
+                <span class="text-secondary fw-bold me-2">&emsp;Logged in as {{ user}}!</span>
+            </div>
+
             <h2>Dashboard Overview</h2>
             <hr>
+
 
             <div class="row">
                 <div class="col-md-6">
