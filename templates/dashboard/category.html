@@ -15,10 +15,14 @@
 
 
         <main class="col-md-10 bg-light p-4">
+            <a href="{%url 'add_category' %}" class="btn btn-dark text-light float-right">Add new</a>
             <h2>All Categories</h2>
 
 
+
+
             <div class="row">
+
 
                    <table class="table table-hover">
                       <thead>
@@ -34,13 +38,13 @@
                       {% for cat in cate_name %}
                         <tr>
                           <td >{{forloop.counter}}</td>
-                          <td>{{cat}}</td>
+                          <td>{{cat.category_name}}</td>
                           <td>{{cat.created_at}}</td>
                           <td>{{cat.updated_at}}</td>
                           <td>
                               <div class="d-flex gap-1">
-                                  <a href="" class="btn btn-warning btn-sm mr-3">Edit</a>
-                                  <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                  <a href="{% url 'edit_category' cat.id %} " class="btn btn-warning btn-sm mr-3">Edit</a>
+                                  <a href="{% url 'delete_category' cat.id %}" class="btn btn-danger btn-sm">Delete</a>
                               </div>
                           </td>
                         </tr>

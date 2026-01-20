@@ -36,7 +36,7 @@
          <h4 class="text-dark text-center">My Panel</h4>
             <hr class="bg-secondary">
             <a href="{% url 'dashboard_url'%}" class="{% if '/dashboard/' == request.path %}bg-warning{%endif%}">Dashboard</a>
-            <a href="{% url 'dashboard_category'%}" class="{% if '/dashboard/category/' == request.path %}bg-warning{%endif%}">Categories</a>
+            <a href="{% url 'dashboard_category'%}" class="{% if request.path == '/dashboard/category/' or request.path == '/dashboard/add_category/' %}bg-warning{% endif %}">Categories</a>
             <a href="{% url 'dashboard_blogs'%}" class="{% if '/dashboard/blogs/' == request.path %}bg-warning{%endif%}">Blogs</a>
         </nav>
 
