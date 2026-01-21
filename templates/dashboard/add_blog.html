@@ -20,7 +20,7 @@
             <h2>Add New Blog</h2>
             <hr>
 
-            <div class="row">
+<!--            <div class="row">-->
                 <form action="{% url 'add_new_blog' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
@@ -28,7 +28,7 @@
                 </form>
 
 
-                </div>
+<!--                </div>-->
 
 
         </main>

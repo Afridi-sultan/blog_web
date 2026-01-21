@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends 'base.html'%}
+{% block content %}
+
+
+<div class="container-fluid">
+    <div class="row">
+{% include 'dashboard/sidebar.html' %}
+
+
+        <main class="col-md-10 bg-light p-4">
+            <a href="{% url 'add_platform' %}" class="btn btn-dark text-light float-right">Add new</a>
+            <h2>All Platform</h2>
+
+
+
+
+            <div class="row">
+
+
+                   <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th>Sl No</th>
+                          <th>Platform Name</th>
+                          <th>Links</th>
+
+                          <th> Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                    {% for platform in social_link %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                          <td>{{platform.platform_name}}</td>
+                          <td class="text-primary">{{platform.platform_url}}</td>
+                          <td>
+                              <div class="d-flex gap-1">
+                                  <a href="{% url 'edit_platform' platform.id %}" class="btn btn-warning btn-sm mr-3">Edit</a>
+                                  <a href="{% url 'delete_platform' platform.id %}" class="btn btn-danger btn-sm">Delete</a>
+                              </div>
+                          </td>
+                        </tr>
+                    {% endfor %}
+
+
+                      </tbody>
+                    </table>
+
+
+
+                </div>
+
+
+        </main>
+
+    </div>
+</div>
+
+{% endblock %}
+</body>
+</html>

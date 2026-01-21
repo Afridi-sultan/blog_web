@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from blog.models import Category, Blog
-from dashboard_main.forms import CategoryForm, BlogForm
+from blog.models import Category, Blog, Platform, About
+from dashboard_main.forms import CategoryForm, BlogForm, PlatformForm , AboutForm
 from django.template.defaultfilters import slugify
 
 @login_required(login_url='login_page')
 def dashboard(request):
     category_count = Category.objects.all().count()
     blog_count = Blog.objects.all().count()
+    platform_count = Platform.objects.all().count()
     context = {
         'category_count':category_count,
-        'blog_count':blog_count
+        'blog_count':blog_count,
+        'platform_count':platform_count
     }
     return render(request,'dashboard/dashboard.html',context)
 
 #user dashboard category
 def dashboard_category(request):
     return render(request,'dashboard/category.html')
-
+@login_required(login_url='login_page')
 #user dashboard blogs
 def dashboard_blogs(request):
     all_blogs = Blog.objects.all().order_by('-created_at')
@@ -100,3 +102,85 @@ def delete_blog(request,pk):
     post = get_object_or_404(Blog, pk=pk)
     post.delete()
     return redirect('dashboard_blogs')
+
+#add platform links
+def platform(request):
+
+    return render(request,'dashboard/platform.html')
+
+#Edit platform
+def edit_platform(request,pk):
+    all_platform = get_object_or_404(Platform, pk=pk)
+    if request.method == 'POST':
+        form = PlatformForm(request.POST, instance=all_platform)
+        if form.is_valid():
+            form.save()
+            return redirect('platform')
+    form = PlatformForm(instance=all_platform)
+    context = {
+        'form':form,
+        'all_platform':all_platform,
+    }
+    return render(request,'dashboard/edit_platform.html', context)
+
+#Add platform
+def add_platform(request):
+    if request.method == 'POST':
+        form = PlatformForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return  redirect('platform')
+    form = PlatformForm()
+    context = {
+        'form':form,
+    }
+    return render(request,'dashboard/add_platform.html',context)
+
+#delete platform
+def delete_platform(request,pk):
+    all_platform = get_object_or_404(Platform, pk=pk)
+    all_platform.delete()
+    return redirect('platform')
+
+#about dynamic =======================================
+#add about
+def about(request):
+    all_about = About.objects.all()
+    context = {
+        'about_details':all_about
+    }
+    return render(request,'dashboard/about.html',context)
+
+#Edit about
+def edit_about(request,pk):
+    all_about = get_object_or_404(About, pk=pk)
+    if request.method == 'POST':
+        form = AboutForm(request.POST, instance=all_about)
+        if form.is_valid():
+            form.save()
+            return redirect('about')
+    form = AboutForm(instance=all_about)
+    context = {
+        'form':form,
+        'all_about':all_about,
+    }
+    return render(request,'dashboard/edit_about.html', context)
+
+#Add about
+def add_about(request):
+    if request.method == 'POST':
+        form = AboutForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return  redirect('about')
+    form = AboutForm()
+    context = {
+        'form':form,
+    }
+    return render(request,'dashboard/add_about.html',context)
+
+#delete about
+def delete_about(request,pk):
+    all_about = get_object_or_404(About, pk=pk)
+    all_about.delete()
+    return redirect('about')

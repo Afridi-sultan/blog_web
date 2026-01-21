@@ -38,5 +38,7 @@
             <a href="{% url 'dashboard_url'%}" class="{% if '/dashboard/' == request.path %}bg-warning{%endif%}">Dashboard</a>
             <a href="{% url 'dashboard_category'%}" class="{% if request.path == '/dashboard/category/' or request.path == '/dashboard/add_category/' %}bg-warning{% endif %}">Categories</a>
             <a href="{% url 'dashboard_blogs'%}" class="{% if '/dashboard/blogs/' == request.path %}bg-warning{%endif%}">Blogs</a>
+            <a href="{% url 'platform'%}" class="{% if '/dashboard/platform/' == request.path %}bg-warning{%endif%}">Platform</a>
+            <a href="{% url 'about'%}" class="{% if '/dashboard/about/' == request.path %}bg-warning{%endif%}">About</a>
         </nav>
 
