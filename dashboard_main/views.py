@@ -146,8 +146,10 @@ def delete_platform(request,pk):
 #add about
 def about(request):
     all_about = About.objects.all()
+    count_about = About.objects.all().count()
     context = {
-        'about_details':all_about
+        'about_details':all_about,
+        'count_about':count_about,
     }
     return render(request,'dashboard/about.html',context)
 

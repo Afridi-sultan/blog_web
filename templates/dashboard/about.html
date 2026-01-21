@@ -15,7 +15,18 @@
 
 
         <main class="col-md-10 bg-light p-4">
+            {% if count_about == 0 %}
             <a href="{% url 'add_about' %}" class="btn btn-dark text-light float-right">Add new</a>
+            {% else %}
+            <div class="text-center">
+              <span class="badge badge-warning p-2">
+                ⚠️ Only one “About” detail is allowed. An entry already exists.
+              </span>
+            </div>
+
+
+
+            {% endif %}
             <h2>About</h2>
 
 
