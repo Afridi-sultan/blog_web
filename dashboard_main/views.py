@@ -95,3 +95,8 @@ def edit_blog(request,pk):
         'blog':blog,
     }
     return render(request,'dashboard/edit_blog.html',context)
+#Delete blog functionality
+def delete_blog(request,pk):
+    post = get_object_or_404(Blog, pk=pk)
+    post.delete()
+    return redirect('dashboard_blogs')
