@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from blog.models import Category, Blog, Platform, About
 from dashboard_main.forms import CategoryForm, BlogForm, PlatformForm , AboutForm
 from django.template.defaultfilters import slugify
-
+from django.contrib.auth.models import User
 @login_required(login_url='login_page')
 def dashboard(request):
     category_count = Category.objects.all().count()
@@ -186,3 +186,11 @@ def delete_about(request,pk):
     all_about = get_object_or_404(About, pk=pk)
     all_about.delete()
     return redirect('about')
+
+#fetch users
+def users(request):
+    all_user = User.objects.all()
+    context = {
+        'all_user':all_user,
+    }
+    return render(request,'dashboard/users.html',context)

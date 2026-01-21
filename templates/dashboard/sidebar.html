@@ -40,5 +40,8 @@
             <a href="{% url 'dashboard_blogs'%}" class="{% if '/dashboard/blogs/' == request.path %}bg-warning{%endif%}">Blogs</a>
             <a href="{% url 'platform'%}" class="{% if '/dashboard/platform/' == request.path %}bg-warning{%endif%}">Platform</a>
             <a href="{% url 'about'%}" class="{% if '/dashboard/about/' == request.path %}bg-warning{%endif%}">About</a>
+            {% if perms.auth.view_user %}
+            <a href="{% url 'users' %}" class="{% if '/dashboard/users/' in request.path %}bg-warning{%endif%}">Users</a>
+            {% endif %}
         </nav>
 
