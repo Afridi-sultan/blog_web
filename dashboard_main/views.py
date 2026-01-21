@@ -78,3 +78,20 @@ def add_new_blog(request):
         'form':form
     }
     return render(request,'dashboard/add_blog.html',context)
+#Edit blog functionality
+def edit_blog(request,pk):
+    blog = get_object_or_404(Blog, pk=pk)
+    if request.method == 'POST':
+        form = BlogForm(request.POST, request.FILES, instance=blog)
+        if form.is_valid():
+            temporary_save = form.save(commit=False)
+            title = form.cleaned_data['title']
+            temporary_save.slug = slugify(title)+'-'+str(temporary_save.id)
+            temporary_save.save()
+            return redirect('dashboard_blogs')
+    form = BlogForm(instance=blog)
+    context = {
+        'form':form,
+        'blog':blog,
+    }
+    return render(request,'dashboard/edit_blog.html',context)

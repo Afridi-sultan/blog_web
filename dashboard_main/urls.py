@@ -9,5 +9,6 @@ urlpatterns = [
     path('delete_category/<int:pk>/',views.delete_category, name='delete_category'),
     path('category/<int:pk>/',views.edit_category,name='edit_category'),
     #blogs urls
-    path('blogs/add_new_blog/',views.add_new_blog, name='add_new_blog')
+    path('blogs/add_new_blog/',views.add_new_blog, name='add_new_blog'),
+    path('blogs/edit_blog/<int:pk>/',views.edit_blog, name='edit_blog')
 ]
