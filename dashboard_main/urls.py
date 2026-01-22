@@ -24,4 +24,6 @@ urlpatterns = [
     path('about/add_platform/',views.add_about,name='add_about'),
     #show users for manager
     path('users/',views.users, name='users'),
+    path('users/add_user/',views.add_user, name='add_user'),
+    path('users/edit_user/<int:pk>/',views.edit_user, name='edit_user')
 ]

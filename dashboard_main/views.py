@@ -1,7 +1,9 @@
+from timeit import reindent
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from blog.models import Category, Blog, Platform, About
-from dashboard_main.forms import CategoryForm, BlogForm, PlatformForm , AboutForm
+from dashboard_main.forms import CategoryForm, BlogForm, PlatformForm, AboutForm, AddUserForm
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 @login_required(login_url='login_page')
@@ -187,10 +189,41 @@ def delete_about(request,pk):
     all_about.delete()
     return redirect('about')
 
-#fetch users
+#fetch users ==================================
 def users(request):
     all_user = User.objects.all()
     context = {
         'all_user':all_user,
     }
     return render(request,'dashboard/users.html',context)
+
+#add new user
+def add_user(request):
+    if request.method == 'POST':
+        form = AddUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+
+    form = AddUserForm()
+    context = {
+        'form':form,
+    }
+    return render(request,'dashboard/add_user.html',context)
+
+#edit user
+def edit_user(request,pk):
+    main_user = get_object_or_404(User, pk=pk)
+    if request.method == 'POST':
+        form = AddUserForm(request.POST, instance=main_user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+
+    form = AddUserForm(instance=main_user)
+    context = {
+        'form':form,
+        'main_user':main_user,
+    }
+
+    return render(request,'dashboard/edit_user.html',context)

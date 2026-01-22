@@ -15,7 +15,7 @@
 
 
         <main class="col-md-10 bg-light p-4">
-            <a href="" class="btn btn-dark text-light float-right">Add new</a>
+            <a href="{% url 'add_user' %}" class="btn btn-dark text-light float-right">Add new user</a>
             <h2>Users</h2>
 
 
@@ -48,7 +48,7 @@
 
                           <td>
                               <div class="d-flex gap-1">
-                                  <a href=" " class="btn btn-warning btn-sm mr-3">Edit</a>
+                                  <a href="{% url 'edit_user' user.id %} " class="btn btn-warning btn-sm mr-3">Edit</a>
                                   <a href="" class="btn btn-danger btn-sm">Delete</a>
                               </div>
                           </td>

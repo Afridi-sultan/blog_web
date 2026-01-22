@@ -45,6 +45,7 @@
         <div class="blog-post">
           <a href="{% url 'slug_blog' post.slug %}" class="text-dark" ><h2 class="blog-post-title">{{ post.title }}</h2> </a>
           <p class="blog-post-meta">
+
             {{ post.created_at|timesince }} ago | {{ post.author }}
           </p>
           <p>{{ post.short_description }}</p>
