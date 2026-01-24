@@ -1,30 +1,94 @@
 {% extends 'base.html'%}
 {% block content %}
+{% load crispy_forms_tags %}
 <!-- Page content-->
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-8">
             <!-- Post content-->
-            {% for post in single_blog %}
+
             <article>
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1">{{post.title}}</h1>
+                    <h1 class="fw-bolder mb-1">{{single_blog.title}}</h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2"> On {{ post.created_at }}  | Posted by: {{ post.author }}</div>
+                    <div class="text-muted fst-italic mb-2"> On {{ single_blog.created_at }}  | Posted by: {{ single_blog.author }}</div>
                     <!-- Post category-->
-                    <a class="badge bg-warning text-decoration-none text-light" href="#!">{{post.category}}</a>
+                    <a class="badge bg-warning text-decoration-none text-light" href="#!">{{single_blog.category}}</a>
                 </header>
                 <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="{{post.featured_image.url}}" alt="..." /></figure>
+                <figure class="mb-4"><img class="img-fluid rounded" src="{{single_blog.featured_image.url}}" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4">{{post.blog_body}}</p>
+                    <p class="fs-5 mb-4">{{single_blog.blog_body}}</p>
                     </section>
             </article>
-            {% endfor %}
+
+
+
+            <!-- comments -->
+        <div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-9">
+
+      <!-- Comment Title -->
+        <h4 class="mb-4">💬 Comments ({{count_comment}})</h4>
+        {% if comments %}
+        {% for comment in comments %}
+
+      <!-- Single Comment -->
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body d-flex">
+<!--          <img src="https://i.pravatar.cc/50" class="rounded-circle mr-3" alt="user">-->
+            <div class="rounded-circle mr-3"> <i class="bi bi-person-circle text-dark"></i> </div>
+          <div>
+            <h6 class="mb-1">
+              {{comment.user}}
+              <small class="text-muted ml-2">{{ comment.created_at|timesince }} ago</small>
+            </h6>
+            <p class="mb-0 text-muted">
+              {{comment}}
+            </p>
+          </div>
         </div>
+      </div>
+
+        {% endfor %}
+        {% else %}
+        <p>No comments found</p>
+        {% endif %}
+      <!-- Single Comment -->
+
+        <!-- Add Comment Form -->
+      <div class="card mt-4 shadow">
+        <div class="card-body">
+          <h5 class="mb-3">✍️ Leave a Comment</h5>
+            {% if user.is_authenticated %}
+          <form action="" method="post">
+              {% csrf_token %}
+            <div class="form-group">
+              <textarea name="comment" class="form-control" rows="4" placeholder="Write your comment..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Post Comment
+            </button>
+          </form>
+            {% else %}
+            <p>Please <a class="text-warning" href="{%url 'login_page' %}"> login</a> to write a comment!</p>
+            {% endif %}
+
+        </div>
+      </div>
+      <!-- end form -->
+      </div>
+      </div>
+      </div>
+        <!-- comments -->
+        </div>
+
+
+
         <!-- Side widgets-->
         <div class="col-lg-4">
             <!-- Search widget-->

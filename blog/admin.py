@@ -1,9 +1,5 @@
-
-
 from django.contrib import admin
-
-from .models import About, Platform
-from .models import Category,Blog
+from .models import Category,Blog,About, Platform,BlogComment
 
 class BlogAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
@@ -22,3 +18,4 @@ admin.site.register(Category)
 admin.site.register(Platform)
 admin.site.register(About,AboutSetting)
 admin.site.register(Blog, BlogAdmin)
+admin.site.register(BlogComment)

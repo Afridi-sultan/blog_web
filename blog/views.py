@@ -1,8 +1,11 @@
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import auth
+
+
 from my_blog.forms import RegistrationForm
-from .models import Blog, Category
+from .models import Blog, Category, BlogComment
 
 
 def category_page(request,pk):
@@ -15,9 +18,23 @@ def category_page(request,pk):
     return render(request,'cat_page.html',context)
 
 def slug_blog(request,slug):
-    single_blog = Blog.objects.filter(slug=slug)
+    single_blog = get_object_or_404(Blog, slug=slug)
+    if request.method == 'POST':
+        comment = BlogComment()
+        comment.user = request.user
+        comment.blog = single_blog
+        comment.comment = request.POST['comment']
+        comment.save()
+        return HttpResponseRedirect(request.path_info)
+    #comment
+    blog_comment = BlogComment.objects.filter(blog=single_blog)
+    count_comment = blog_comment.count()
+
+
     context = {
-        'single_blog':single_blog
+        'single_blog':single_blog,
+        'comments':blog_comment,
+        'count_comment':count_comment
     }
     return render(request,'slug_blog.html',context)
 
