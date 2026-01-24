@@ -227,3 +227,9 @@ def edit_user(request,pk):
     }
 
     return render(request,'dashboard/edit_user.html',context)
+
+#delete user
+def delete_user(request,pk):
+    the_user = get_object_or_404(User, pk=pk)
+    the_user.delete()
+    return redirect('users')
